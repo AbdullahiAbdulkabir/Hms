@@ -1,7 +1,13 @@
 	<?php
 	require_once 'includes/functions.php';
     include 'includes/database.php';
-         
+    // $ret = '';
+if (isset($_POST['submit'])) {
+       
+         $name = $_POST['name'];
+         $level = $_POST['level'];
+         $password = $_POST['password'];
+
             $link = mysqli_connect("localhost", "root", "","hms");
 
             if (!$link) {
@@ -10,24 +16,23 @@
                 echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
                 exit;
             }
-//             $db_select = mysqli_select_db( $link,"hms");//the first is the name of database, secondly connection created above
-// if (!$db_select) {
-// die("database selection failed") ;
-// }
-// else{ echo "created";
-// }
-            // echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
-            // echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
-            // $sql= 'INSERT INTO users (Name, password,User_level ) values ("Abd", "12", "3")';
-           // $query= mysqli_query($link, $sql);
+            $db_select = mysqli_select_db( $link,"hms");//the first is the name of database, secondly connection created above
+        if (!$db_select) {
+        die("database selection failed") ;
+        }    
+            $sql= "INSERT INTO users (Name, password,User_level) values ('$name', '$password', '$level')";
+           $query= mysqli_query($link, $sql);
 
-           //  if (!$query){
-           //      echo " <br> Error while quering" . mysqli_connect_error(). PHP_EOL;
-           //  }
+            if (!$query){
+                echo " <br> Error while quering" . mysqli_connect_error(). PHP_EOL;
+            }else{
+              $ret= "Successful Created Account";
+            }
 
            //  mysqli_close($link);
          
-	 ?>
+}
+     ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +65,14 @@
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
-	 		<div class="col-md-offset-5 col-sm-offset-3 "><?php  ?></div>
+	 		<?php if (isset($ret) ) { ?>
+                   <div class="form-group">
+                          <div class="alert alert-success">
+                            <span class="glyphicon glyphicon-info-sign"></span> <?php echo $ret; ?>
+                          </div>
+                    </div>
+                  <?php
+            } ?>
                     <div class="panel-heading">
                         <h3 class="panel-title">Sign Up</h3>
                     </div>
@@ -87,9 +99,10 @@
                                     </a>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button  class="btn btn-lg btn-success btn-block" type="submit">Submit</a>
+                                <button  class="btn btn-lg btn-success btn-block" type="submit" name="submit">Submit</a>
                             </fieldset>
                     <?php 
+
                              ?>
                         </form>
                     </div>
