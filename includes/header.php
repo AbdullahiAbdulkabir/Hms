@@ -1,11 +1,16 @@
-<?php require_once 'database.php'; 
+<?php 
+
+require_once 'database.php'; 
  include 'functions.php' ;
-     // require_once  '../includes/database.php' ;
-     $query = "SELECT  FROM users WHERE User_level=".$_SESSION['User_level'];
-        $res = mysqli_query($conn, $query);
-        // $userRow = mysqli_fetch_row($res);
-        $User_level= $_SESSION['User_level'];
-        echo "User level ".$User_level;
+    // require_once  '../includes/database.php' ;
+     // $query = "SELECT  FROM users WHERE User_level=".$_SESSION['User_level'];
+     //    $res = mysqli_query($conn, $query);
+     //   while ($userRow = mysqli_fetch_row($res)) {
+     //    } ;
+        
+         $User_level= $_SESSION['User_level'];
+        $Uname = $_SESSION['Name'];
+        echo "User level ".$User_level. $Uname;
         
 ?>
 <!DOCTYPE html>
@@ -58,7 +63,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Project Name</a>
+                <a class="navbar-brand" href="index.php">MEDICAL APP</a>
             </div>
             <!-- /.navbar-header -->
 

@@ -21,17 +21,21 @@
 </head>
 <body>
     <?php
-    // $_SESSION['User_level']='';
- $query = "SELECT * FROM users ";
-      $result = mysqli_query($conn, $query);
-      // $name='';
+    
     if(isset($_POST['login']) ) {
         $name = ucfirst( strtolower( $_POST['name']));
+        $query = "SELECT * FROM users WHERE Name = '$name'";
+        $result = mysqli_query($conn, $query);
+
+        // print_r( $result );
+       
         $password = $_POST['password'];
-      while($row = mysqli_fetch_array($result) ) {  
+      while( $row = mysqli_fetch_array($result) ) {  
         $_SESSION['User_level'] = $row['User_level'];
-        // $User_level= $row['User_level']; 
-             if($row['Name']==$name) {
+        $_SESSION['Name'] = $row['Name'];
+
+        // $User_level= $row['User_level'];     
+             if($row['Name'] == $name && $row['password']==$password) {
                     redirect_to('pages/index.php');
                   
                     }else {
@@ -79,5 +83,6 @@
         </div>
     </div>
 </body>
+<script src="js/app.js"></script>
 <?php  ?>
 </html>

@@ -4,7 +4,7 @@
     // $ret = '';
 if (isset($_POST['submit'])) {
        
-         $name = $_POST['name'];
+         $name = ucfirst($_POST['name']);
          $level = $_POST['level'];
          $password = $_POST['password'];
 
@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
      ?>
 <!DOCTYPE html>
 <html>
-<head>
+<head >
 	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
